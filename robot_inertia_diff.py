@@ -60,23 +60,34 @@ def analyze(data):
 
 
 def main():
-    """Read one UTF-8 JSON document and emit one machine-readable report."""
+    """Analyze a JSON envelope or explicitly selected native files."""
     import argparse
     import json
     import sys
     from pathlib import Path
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("input", help="JSON input path, or - for stdin")
+    parser.add_argument('input', nargs='?', help='JSON input path, or - for stdin')
+    parser.add_argument('--before', help='Read before directly from a local file')
+    parser.add_argument('--after', help='Read after directly from a local file')
+    parser.add_argument('--tolerance', type=float, default=1e-9)
     args = parser.parse_args()
+    native = bool(args.before or args.after)
+    if native and (args.input or not (args.before and args.after)):
+        parser.error('Supply all native file flags, without a positional JSON input')
+    if not native and not args.input:
+        parser.error('Supply a JSON input or native file flags')
     try:
-        raw = sys.stdin.read() if args.input == "-" else Path(args.input).read_text(encoding="utf-8")
-        data = json.loads(raw)
+        if native:
+            data = {'before': Path(args.before).read_text(), 'after': Path(args.after).read_text(), 'tolerance': args.tolerance}
+        else:
+            raw = sys.stdin.read() if args.input == '-' else Path(args.input).read_text(encoding='utf-8')
+            data = json.loads(raw)
         if not isinstance(data, dict):
-            raise ValueError("input must be a JSON object")
+            raise ValueError('input must be a JSON object')
         result = analyze(data)
         print(json.dumps(result, indent=2, sort_keys=True, allow_nan=False))
     except (OSError, ValueError, KeyError, TypeError, OverflowError) as error:
-        print(f"Invalid input: {error}", file=sys.stderr)
+        print(f'Invalid input: {error}', file=sys.stderr)
         return 2
     return 0
 

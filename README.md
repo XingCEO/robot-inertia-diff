@@ -49,6 +49,16 @@ robot-inertia-diff examples/input.json
 
 The package is installed from this checkout; no PyPI publication is claimed.
 
+## Work with native files
+
+Use existing files directly instead of wrapping them in a JSON string:
+
+```bash
+python3 -m robot_inertia_diff --before examples/before.urdf --after examples/after.urdf
+```
+
+The analyzer reads only the paths explicitly supplied. It does not crawl a repository or execute a Wasm module. Native file flags and the positional JSON envelope are mutually exclusive.
+
 ## Input contract
 
 Use [the complete example](examples/input.json) as a starting point. Paths and strings in JSON are data unless the contract explicitly says they refer to local files.
