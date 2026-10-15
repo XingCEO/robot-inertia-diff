@@ -1,0 +1,5 @@
+{
+  "before": "<robot name=\"r\"><link name=\"base\"><inertial><mass value=\"1\"/><inertia ixx=\"1\" iyy=\"1\" izz=\"1\" ixy=\"0\" ixz=\"0\" iyz=\"0\"/></inertial></link></robot>",
+  "after": "<robot name=\"r\"><link name=\"base\"><inertial><mass value=\"1.2\"/><inertia ixx=\"1\" iyy=\"1\" izz=\"1\" ixy=\"0\" ixz=\"0\" iyz=\"0\"/></inertial></link></robot>",
+  "tolerance": 1e-08
+}

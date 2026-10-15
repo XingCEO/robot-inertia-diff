@@ -1,0 +1,13 @@
+{
+  "changes": [
+    {
+      "kind": "physical_change",
+      "link": "base",
+      "mass_delta": 0.19999999999999996,
+      "max_com_delta": 0.0,
+      "max_tensor_delta": 0.0
+    }
+  ],
+  "equivalent_within_tolerance": false,
+  "physical_warnings": []
+}

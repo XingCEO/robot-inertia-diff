@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "robot-inertia-diff"
+version = "0.1.0"
+description = "Compare URDF mass properties after frame changes and conversion."
+readme = "README.md"
+requires-python = ">=3.11"
+license = {text = "MIT"}
+authors = [{name = "XingCEO"}]
+classifiers = ["Development Status :: 3 - Alpha", "Programming Language :: Python :: 3", "License :: OSI Approved :: MIT License"]
+
+[project.scripts]
+robot-inertia-diff = "robot_inertia_diff:main"
+
+[project.urls]
+Repository = "https://github.com/XingCEO/robot-inertia-diff"
+Issues = "https://github.com/XingCEO/robot-inertia-diff/issues"
+
+[tool.setuptools]
+py-modules = ["robot_inertia_diff"]
